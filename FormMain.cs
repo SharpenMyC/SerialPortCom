@@ -22,6 +22,7 @@ namespace SerialPortCom
         }
         string receivedConfig = "QT420;0.0;500.0;50;450";
         string[] instrumentConfigs;
+        List<MeasurementPoint> allMeasuredPoints = new List<MeasurementPoint>();    
 
         double chartXValue = 0.0;
         double chartYValue = 0.0;
@@ -245,8 +246,18 @@ namespace SerialPortCom
                 if (comboBoxBaud.SelectedIndex > -1)
                 {
                     serialPort1.BaudRate = Convert.ToInt32(comboBoxBaud.Items[comboBoxBaud.SelectedIndex]);
-                    serialPort1.Open();
-                    radioButtonConnected.Checked = true;
+                    try
+                    {
+                        serialPort1.Open();
+                        radioButtonConnected.Checked = true;
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Unable to connect");
+                        radioButtonConnected.Checked = false;
+                    }
+                    
+                    
                     //        timer1.Enabled = true;
                 }
             }
@@ -439,28 +450,41 @@ namespace SerialPortCom
         {
             if (serialPort1.IsOpen)
             {
-                serialPort1.WriteLine("readanalog");
+                serialPort1.WriteLine("ReadSensor");
                 timerSerialReceive.Enabled = true;
                 timerChartAdd.Enabled = false;
+
             }
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
             timerChartAdd.Enabled = true;
+            
         }
 
         private void timerSerialReceive_Tick(object sender, EventArgs e)
         {
             if (serialPort1.BytesToRead > 0)
             {
+                MeasurementPoint measuredPoint;   
                 string availableData = "";
                 availableData += serialPort1.ReadExisting().ToString();
                 string[] analogReadings = availableData.Split(';');
+
+                
+
                 textBoxTextFile.AppendText(availableData);
-                if (analogReadings.Length == 4)
+                if (analogReadings.Length == 3)
                 {
-                    listBoxVa.Items.Add(analogReadings[0]);
+                    measuredPoint = new MeasurementPoint(DateTime.Now.ToLongTimeString(), Convert.ToInt32(analogReadings[0]), Convert.ToInt32(analogReadings[1]), Convert.ToInt32(analogReadings[2]));
+                    chart1.Series[0].Points.AddXY(measuredPoint.time, measuredPoint.va);
+                    chart1.Series[1].Points.AddXY(measuredPoint.time, measuredPoint.vb);
+                    chart1.Series[2].Points.AddXY(measuredPoint.time, measuredPoint.vab);
+                    allMeasuredPoints.Add(measuredPoint);
+
+                    //listBoxVa.Items.Add(analogReadings[0]);
+                    /*
                     chart1.Series[0].Points.AddXY(Convert.ToDouble(listBoxVa.Items.Count - 1),
                                                    Convert.ToDouble(listBoxVa.Items[listBoxVa.Items.Count - 1]));
                     listBoxVb.Items.Add(analogReadings[1]);
@@ -469,6 +493,8 @@ namespace SerialPortCom
                     listBoxVab.Items.Add(analogReadings[2]);
                     chart1.Series[2].Points.AddXY(Convert.ToDouble(listBoxVab.Items.Count - 1),
                                                   Convert.ToDouble(listBoxVab.Items[listBoxVa.Items.Count - 1]));
+                
+                    */
                 }
 
                 timerChartAdd.Enabled = true;
@@ -644,6 +670,20 @@ namespace SerialPortCom
             textBoxResult.Clear();
             textBoxResult.Text = writeString;
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialogCSV.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamWriter streamWritePoints = new StreamWriter(saveFileDialogCSV.FileName))
+
+                    foreach (MeasurementPoint point in allMeasuredPoints)
+                {
+                        streamWritePoints.WriteLine(point.ToString());
+                }
+                
+            }
         }
     }
 }

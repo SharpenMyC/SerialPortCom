@@ -37,6 +37,20 @@ namespace SerialPortCom
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageString = new System.Windows.Forms.TabPage();
+            this.buttonSendSerial = new System.Windows.Forms.Button();
+            this.buttonRead = new System.Windows.Forms.Button();
+            this.buttonSaveFile = new System.Windows.Forms.Button();
+            this.buttonUpdate = new System.Windows.Forms.Button();
+            this.textBoxAH = new System.Windows.Forms.TextBox();
+            this.labelAH = new System.Windows.Forms.Label();
+            this.textBoxAL = new System.Windows.Forms.TextBox();
+            this.labelAL = new System.Windows.Forms.Label();
+            this.textBoxURV = new System.Windows.Forms.TextBox();
+            this.labelURV = new System.Windows.Forms.Label();
+            this.textBoxLRV = new System.Windows.Forms.TextBox();
+            this.labelLRV = new System.Windows.Forms.Label();
+            this.textBoxTagname = new System.Windows.Forms.TextBox();
+            this.labelTagname = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonMessageBox = new System.Windows.Forms.Button();
             this.buttonPrint = new System.Windows.Forms.Button();
@@ -88,21 +102,9 @@ namespace SerialPortCom
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.timerChartAdd = new System.Windows.Forms.Timer(this.components);
-            this.labelTagname = new System.Windows.Forms.Label();
-            this.textBoxTagname = new System.Windows.Forms.TextBox();
-            this.textBoxLRV = new System.Windows.Forms.TextBox();
-            this.labelLRV = new System.Windows.Forms.Label();
-            this.textBoxURV = new System.Windows.Forms.TextBox();
-            this.labelURV = new System.Windows.Forms.Label();
-            this.textBoxAL = new System.Windows.Forms.TextBox();
-            this.labelAL = new System.Windows.Forms.Label();
-            this.textBoxAH = new System.Windows.Forms.TextBox();
-            this.labelAH = new System.Windows.Forms.Label();
-            this.buttonUpdate = new System.Windows.Forms.Button();
-            this.buttonSaveFile = new System.Windows.Forms.Button();
-            this.buttonRead = new System.Windows.Forms.Button();
             this.saveFileDialogConfig = new System.Windows.Forms.SaveFileDialog();
-            this.buttonSendSerial = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.saveFileDialogCSV = new System.Windows.Forms.SaveFileDialog();
             this.tabControlMain.SuspendLayout();
             this.tabPageString.SuspendLayout();
             this.tabPageLoop.SuspendLayout();
@@ -157,6 +159,137 @@ namespace SerialPortCom
             this.tabPageString.TabIndex = 0;
             this.tabPageString.Text = "String";
             this.tabPageString.UseVisualStyleBackColor = true;
+            // 
+            // buttonSendSerial
+            // 
+            this.buttonSendSerial.Location = new System.Drawing.Point(377, 247);
+            this.buttonSendSerial.Name = "buttonSendSerial";
+            this.buttonSendSerial.Size = new System.Drawing.Size(185, 29);
+            this.buttonSendSerial.TabIndex = 20;
+            this.buttonSendSerial.Text = "Send Serial";
+            this.buttonSendSerial.UseVisualStyleBackColor = true;
+            this.buttonSendSerial.Click += new System.EventHandler(this.buttonSendSerial_Click);
+            // 
+            // buttonRead
+            // 
+            this.buttonRead.Location = new System.Drawing.Point(377, 200);
+            this.buttonRead.Name = "buttonRead";
+            this.buttonRead.Size = new System.Drawing.Size(54, 33);
+            this.buttonRead.TabIndex = 8;
+            this.buttonRead.Text = "Read";
+            this.buttonRead.UseVisualStyleBackColor = true;
+            this.buttonRead.Click += new System.EventHandler(this.buttonRead_Click);
+            // 
+            // buttonSaveFile
+            // 
+            this.buttonSaveFile.Location = new System.Drawing.Point(509, 200);
+            this.buttonSaveFile.Name = "buttonSaveFile";
+            this.buttonSaveFile.Size = new System.Drawing.Size(54, 33);
+            this.buttonSaveFile.TabIndex = 7;
+            this.buttonSaveFile.Text = "Save";
+            this.buttonSaveFile.UseVisualStyleBackColor = true;
+            this.buttonSaveFile.Click += new System.EventHandler(this.buttonSaveFile_Click);
+            // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Location = new System.Drawing.Point(443, 200);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(54, 33);
+            this.buttonUpdate.TabIndex = 6;
+            this.buttonUpdate.Text = "Update";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            // 
+            // textBoxAH
+            // 
+            this.textBoxAH.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxAH.Location = new System.Drawing.Point(377, 159);
+            this.textBoxAH.Name = "textBoxAH";
+            this.textBoxAH.Size = new System.Drawing.Size(186, 24);
+            this.textBoxAH.TabIndex = 5;
+            // 
+            // labelAH
+            // 
+            this.labelAH.AutoSize = true;
+            this.labelAH.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAH.Location = new System.Drawing.Point(248, 162);
+            this.labelAH.Name = "labelAH";
+            this.labelAH.Size = new System.Drawing.Size(80, 18);
+            this.labelAH.TabIndex = 19;
+            this.labelAH.Text = "Alarm High";
+            // 
+            // textBoxAL
+            // 
+            this.textBoxAL.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxAL.Location = new System.Drawing.Point(377, 129);
+            this.textBoxAL.Name = "textBoxAL";
+            this.textBoxAL.Size = new System.Drawing.Size(186, 24);
+            this.textBoxAL.TabIndex = 5;
+            // 
+            // labelAL
+            // 
+            this.labelAL.AutoSize = true;
+            this.labelAL.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAL.Location = new System.Drawing.Point(250, 132);
+            this.labelAL.Name = "labelAL";
+            this.labelAL.Size = new System.Drawing.Size(78, 18);
+            this.labelAL.TabIndex = 17;
+            this.labelAL.Text = "Alarm Low";
+            // 
+            // textBoxURV
+            // 
+            this.textBoxURV.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxURV.Location = new System.Drawing.Point(377, 99);
+            this.textBoxURV.Name = "textBoxURV";
+            this.textBoxURV.Size = new System.Drawing.Size(186, 24);
+            this.textBoxURV.TabIndex = 3;
+            // 
+            // labelURV
+            // 
+            this.labelURV.AutoSize = true;
+            this.labelURV.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelURV.Location = new System.Drawing.Point(248, 102);
+            this.labelURV.Name = "labelURV";
+            this.labelURV.Size = new System.Drawing.Size(127, 18);
+            this.labelURV.TabIndex = 15;
+            this.labelURV.Text = "Upper range value";
+            // 
+            // textBoxLRV
+            // 
+            this.textBoxLRV.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxLRV.Location = new System.Drawing.Point(377, 69);
+            this.textBoxLRV.Name = "textBoxLRV";
+            this.textBoxLRV.Size = new System.Drawing.Size(186, 24);
+            this.textBoxLRV.TabIndex = 2;
+            // 
+            // labelLRV
+            // 
+            this.labelLRV.AutoSize = true;
+            this.labelLRV.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLRV.Location = new System.Drawing.Point(247, 72);
+            this.labelLRV.Name = "labelLRV";
+            this.labelLRV.Size = new System.Drawing.Size(128, 18);
+            this.labelLRV.TabIndex = 13;
+            this.labelLRV.Text = "Lower range value";
+            // 
+            // textBoxTagname
+            // 
+            this.textBoxTagname.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxTagname.Location = new System.Drawing.Point(377, 39);
+            this.textBoxTagname.Name = "textBoxTagname";
+            this.textBoxTagname.PasswordChar = '*';
+            this.textBoxTagname.Size = new System.Drawing.Size(186, 24);
+            this.textBoxTagname.TabIndex = 1;
+            // 
+            // labelTagname
+            // 
+            this.labelTagname.AutoSize = true;
+            this.labelTagname.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTagname.Location = new System.Drawing.Point(247, 42);
+            this.labelTagname.Name = "labelTagname";
+            this.labelTagname.Size = new System.Drawing.Size(70, 18);
+            this.labelTagname.TabIndex = 11;
+            this.labelTagname.Text = "Tagname";
             // 
             // buttonSave
             // 
@@ -262,6 +395,7 @@ namespace SerialPortCom
             // 
             // tabPageLoop
             // 
+            this.tabPageLoop.Controls.Add(this.button1);
             this.tabPageLoop.Controls.Add(this.label3);
             this.tabPageLoop.Controls.Add(this.label2);
             this.tabPageLoop.Controls.Add(this.label1);
@@ -699,141 +833,25 @@ namespace SerialPortCom
             this.timerChartAdd.Interval = 10;
             this.timerChartAdd.Tick += new System.EventHandler(this.timerChartAdd_Tick);
             // 
-            // labelTagname
-            // 
-            this.labelTagname.AutoSize = true;
-            this.labelTagname.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTagname.Location = new System.Drawing.Point(247, 42);
-            this.labelTagname.Name = "labelTagname";
-            this.labelTagname.Size = new System.Drawing.Size(70, 18);
-            this.labelTagname.TabIndex = 11;
-            this.labelTagname.Text = "Tagname";
-            // 
-            // textBoxTagname
-            // 
-            this.textBoxTagname.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxTagname.Location = new System.Drawing.Point(377, 39);
-            this.textBoxTagname.Name = "textBoxTagname";
-            this.textBoxTagname.PasswordChar = '*';
-            this.textBoxTagname.Size = new System.Drawing.Size(186, 24);
-            this.textBoxTagname.TabIndex = 1;
-            // 
-            // textBoxLRV
-            // 
-            this.textBoxLRV.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxLRV.Location = new System.Drawing.Point(377, 69);
-            this.textBoxLRV.Name = "textBoxLRV";
-            this.textBoxLRV.Size = new System.Drawing.Size(186, 24);
-            this.textBoxLRV.TabIndex = 2;
-            // 
-            // labelLRV
-            // 
-            this.labelLRV.AutoSize = true;
-            this.labelLRV.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLRV.Location = new System.Drawing.Point(247, 72);
-            this.labelLRV.Name = "labelLRV";
-            this.labelLRV.Size = new System.Drawing.Size(128, 18);
-            this.labelLRV.TabIndex = 13;
-            this.labelLRV.Text = "Lower range value";
-            // 
-            // textBoxURV
-            // 
-            this.textBoxURV.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxURV.Location = new System.Drawing.Point(377, 99);
-            this.textBoxURV.Name = "textBoxURV";
-            this.textBoxURV.Size = new System.Drawing.Size(186, 24);
-            this.textBoxURV.TabIndex = 3;
-            // 
-            // labelURV
-            // 
-            this.labelURV.AutoSize = true;
-            this.labelURV.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelURV.Location = new System.Drawing.Point(248, 102);
-            this.labelURV.Name = "labelURV";
-            this.labelURV.Size = new System.Drawing.Size(127, 18);
-            this.labelURV.TabIndex = 15;
-            this.labelURV.Text = "Upper range value";
-            // 
-            // textBoxAL
-            // 
-            this.textBoxAL.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxAL.Location = new System.Drawing.Point(377, 129);
-            this.textBoxAL.Name = "textBoxAL";
-            this.textBoxAL.Size = new System.Drawing.Size(186, 24);
-            this.textBoxAL.TabIndex = 5;
-            // 
-            // labelAL
-            // 
-            this.labelAL.AutoSize = true;
-            this.labelAL.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAL.Location = new System.Drawing.Point(250, 132);
-            this.labelAL.Name = "labelAL";
-            this.labelAL.Size = new System.Drawing.Size(78, 18);
-            this.labelAL.TabIndex = 17;
-            this.labelAL.Text = "Alarm Low";
-            // 
-            // textBoxAH
-            // 
-            this.textBoxAH.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxAH.Location = new System.Drawing.Point(377, 159);
-            this.textBoxAH.Name = "textBoxAH";
-            this.textBoxAH.Size = new System.Drawing.Size(186, 24);
-            this.textBoxAH.TabIndex = 5;
-            // 
-            // labelAH
-            // 
-            this.labelAH.AutoSize = true;
-            this.labelAH.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAH.Location = new System.Drawing.Point(248, 162);
-            this.labelAH.Name = "labelAH";
-            this.labelAH.Size = new System.Drawing.Size(80, 18);
-            this.labelAH.TabIndex = 19;
-            this.labelAH.Text = "Alarm High";
-            // 
-            // buttonUpdate
-            // 
-            this.buttonUpdate.Location = new System.Drawing.Point(443, 200);
-            this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(54, 33);
-            this.buttonUpdate.TabIndex = 6;
-            this.buttonUpdate.Text = "Update";
-            this.buttonUpdate.UseVisualStyleBackColor = true;
-            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
-            // 
-            // buttonSaveFile
-            // 
-            this.buttonSaveFile.Location = new System.Drawing.Point(509, 200);
-            this.buttonSaveFile.Name = "buttonSaveFile";
-            this.buttonSaveFile.Size = new System.Drawing.Size(54, 33);
-            this.buttonSaveFile.TabIndex = 7;
-            this.buttonSaveFile.Text = "Save";
-            this.buttonSaveFile.UseVisualStyleBackColor = true;
-            this.buttonSaveFile.Click += new System.EventHandler(this.buttonSaveFile_Click);
-            // 
-            // buttonRead
-            // 
-            this.buttonRead.Location = new System.Drawing.Point(377, 200);
-            this.buttonRead.Name = "buttonRead";
-            this.buttonRead.Size = new System.Drawing.Size(54, 33);
-            this.buttonRead.TabIndex = 8;
-            this.buttonRead.Text = "Read";
-            this.buttonRead.UseVisualStyleBackColor = true;
-            this.buttonRead.Click += new System.EventHandler(this.buttonRead_Click);
-            // 
             // saveFileDialogConfig
             // 
             this.saveFileDialogConfig.DefaultExt = "ccs";
             this.saveFileDialogConfig.FileName = "Instrumentconfig";
             // 
-            // buttonSendSerial
+            // button1
             // 
-            this.buttonSendSerial.Location = new System.Drawing.Point(377, 247);
-            this.buttonSendSerial.Name = "buttonSendSerial";
-            this.buttonSendSerial.Size = new System.Drawing.Size(185, 29);
-            this.buttonSendSerial.TabIndex = 20;
-            this.buttonSendSerial.Text = "Send Serial";
-            this.buttonSendSerial.UseVisualStyleBackColor = true;
-            this.buttonSendSerial.Click += new System.EventHandler(this.buttonSendSerial_Click);
+            this.button1.Location = new System.Drawing.Point(288, 165);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Save";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // saveFileDialogCSV
+            // 
+            this.saveFileDialogCSV.DefaultExt = "csv";
+            this.saveFileDialogCSV.FileName = "measuredpoints";
             // 
             // FormMain
             // 
@@ -929,6 +947,8 @@ namespace SerialPortCom
         private System.Windows.Forms.Label labelTagname;
         private System.Windows.Forms.SaveFileDialog saveFileDialogConfig;
         private System.Windows.Forms.Button buttonSendSerial;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogCSV;
     }
 }
 
