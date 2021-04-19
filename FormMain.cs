@@ -24,8 +24,8 @@ namespace SerialPortCom
         string[] instrumentConfigs;
         List<MeasurementPoint> allMeasuredPoints = new List<MeasurementPoint>();    
 
-        double chartXValue = 0.0;
-        double chartYValue = 0.0;
+
+
 
         private void buttonResult_Click(object sender, EventArgs e)
         {
@@ -264,11 +264,6 @@ namespace SerialPortCom
 
         }
 
-        private void buttonReceive_Click(object sender, EventArgs e)
-        {
-
-
-        }
 
         private void buttonSend_Click(object sender, EventArgs e)
         {
@@ -450,7 +445,7 @@ namespace SerialPortCom
         {
             if (serialPort1.IsOpen)
             {
-                serialPort1.WriteLine("ReadSensor");
+                serialPort1.WriteLine("readraw");
                 timerSerialReceive.Enabled = true;
                 timerChartAdd.Enabled = false;
 
@@ -501,8 +496,6 @@ namespace SerialPortCom
                 timerSerialReceive.Enabled = false;
             }
         }
-
-
         public class MeasurementPoint
         {
             //The objects variables
@@ -528,7 +521,6 @@ namespace SerialPortCom
                 return time + ";" + va + ";" + vb + ";" + vab;
             }
         }
-
         public class Instrument
         {
             //class body
@@ -587,7 +579,6 @@ namespace SerialPortCom
 
 
         }
-
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < instrumentConfigs.Length; i++)
@@ -646,12 +637,6 @@ namespace SerialPortCom
             }
 
         }
-
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-            instrumentConfigs = new string[5];
-        }
-
         private void buttonSaveFile_Click(object sender, EventArgs e)
         {
             if (saveFileDialogConfig.ShowDialog() == DialogResult.OK)
@@ -659,17 +644,6 @@ namespace SerialPortCom
 
                 File.WriteAllText(saveFileDialogConfig.FileName, string.Join(";", instrumentConfigs));
             }
-        }
-
-        private void buttonSendSerial_Click(object sender, EventArgs e)
-        {
-            string writeString;
-            string passwordString = "Passord123";
-
-            writeString = "writeconf>" + passwordString +">" + string.Join(";", instrumentConfigs);
-            textBoxResult.Clear();
-            textBoxResult.Text = writeString;
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -685,5 +659,328 @@ namespace SerialPortCom
                 
             }
         }
+        private void buttonSendSerial_Click(object sender, EventArgs e)
+        {
+            string writeString;
+            string passwordString = "Passord123";
+
+            writeString = "writeconf>" + passwordString +">" + string.Join(";", instrumentConfigs);
+            textBoxResult.Clear();
+            textBoxResult.Text = writeString;
+
+        }
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'softSensDBDataSet.Instruments' table. You can move, or remove it, as needed.
+            this.instrumentsTableAdapter.Fill(this.softSensDBDataSet.Instruments);
+            // TODO: This line of code loads data into the 'softSensDBDataSet2.RemoteDataCollectors' table. You can move, or remove it, as needed.
+            this.remoteDataCollectorsTableAdapter.Fill(this.softSensDBDataSet2.RemoteDataCollectors);
+            // TODO: This line of code loads data into the 'softSensDBDataSet.DataAcqusitionUnits1' table. You can move, or remove it, as needed.
+            this.dataAcqusitionUnits1TableAdapter.Fill(this.softSensDBDataSet.DataAcqusitionUnits1);
+
+            // TODO: This line of code loads data into the 'softSensDBDataSet.Locations' table. You can move, or remove it, as needed.
+            this.locationsTableAdapter.Fill(this.softSensDBDataSet.Locations);
+            // TODO: This line of code loads data into the 'softSensDBDataSet.Manufacturers' table. You can move, or remove it, as needed.
+            this.manufacturersTableAdapter.Fill(this.softSensDBDataSet.Manufacturers);
+            // TODO: This line of code loads data into the 'softSensDBDataSet.RemoteDataCollectors' table. You can move, or remove it, as needed.
+            this.remoteDataCollectorsTableAdapter.Fill(this.softSensDBDataSet.RemoteDataCollectors);
+            // TODO: This line of code loads data into the 'softSensDBDataSet.DataAcqusitionUnits' table. You can move, or remove it, as needed.
+            this.dataAcqusitionUnitsTableAdapter.Fill(this.softSensDBDataSet.DataAcqusitionUnits);
+            instrumentConfigs = new string[5];
+
+
+
+
+        }
+
+        private void tabPageDAU_Enter(object sender, EventArgs e)
+        {
+            this.dataAcqusitionUnits1TableAdapter.Fill(this.softSensDBDataSet.DataAcqusitionUnits1);
+            comboBoxDeviceFind.DisplayMember = "DeviceName";
+            comboBoxDeviceFind.ValueMember = "DAUID";
+            comboBoxDeviceFind.DataSource = softSensDBDataSet.DataAcqusitionUnits1;
+                
+        }
+
+        private void comboBoxDeviceFind_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxDeviceFind.SelectedIndex > -1)
+            {
+                 int filterDAUID = Convert.ToInt32(comboBoxDeviceFind.SelectedValue.ToString());
+                 this.dataAcqusitionUnitsTableAdapter.FillByDAUID(this.softSensDBDataSet.DataAcqusitionUnits,filterDAUID);
+            }
+        }
+
+        private void buttonChange_Click(object sender, EventArgs e)
+        {
+            buttonCancel.Visible = true;
+            buttonRegister.Visible = true;
+            
+            deviceNameTextBox.Enabled = true;
+            baudRateTextBox.Enabled = true;
+            cOMPortTextBox.Enabled = true;
+           // installationDateDateTimePicker.Enabled = true;
+            rDCIDcomboBox.Enabled = true;
+            comboBoxCompany.Enabled = true;
+            comboBoxLocation.Enabled = true;
+        }
+
+        private void buttonNew_Click(object sender, EventArgs e)
+        {
+            buttonCancel.Visible = true;
+            buttonRegister.Visible = true;
+
+            deviceNameTextBox.Enabled = true;
+            baudRateTextBox.Enabled = true;
+            cOMPortTextBox.Enabled = true;
+            installationDateDateTimePicker.Enabled = true;
+            rDCIDcomboBox.Enabled = true;
+            comboBoxCompany.Enabled = true;
+            comboBoxLocation.Enabled = true;
+
+            comboBoxDeviceFind.Text = "";
+
+           // this.dataAcqusitionUnitsTableAdapter.Fill(this.softSensDBDataSet.DataAcqusitionUnits);
+
+            dataAcqusitionUnitsBindingSource1.AddNew();
+            dataAcqusitionUnitsBindingSource1.MoveLast();
+
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            buttonCancel.Visible = false;
+            buttonRegister.Visible = false;
+
+            dataAcqusitionUnitsBindingSource1.CancelEdit();
+                        
+            deviceNameTextBox.Enabled = false;
+            baudRateTextBox.Enabled = false;
+            cOMPortTextBox.Enabled = false;
+            installationDateDateTimePicker.Enabled = false;
+            rDCIDcomboBox.Enabled = false;
+            comboBoxCompany.Enabled = false;
+            comboBoxLocation.Enabled = false;
+
+        }
+
+        private void buttonRegister_Click(object sender, EventArgs e)
+        {
+            buttonCancel.Visible = false;
+            buttonRegister.Visible = false;
+
+            dataAcqusitionUnitsBindingSource1.EndEdit();
+            dataAcqusitionUnitsTableAdapter.Update(softSensDBDataSet.DataAcqusitionUnits);   
+
+
+            deviceNameTextBox.Enabled = false;
+            baudRateTextBox.Enabled = false;
+            cOMPortTextBox.Enabled = false;
+            installationDateDateTimePicker.Enabled = false;
+            rDCIDcomboBox.Enabled = false;
+            comboBoxCompany.Enabled = false;
+            comboBoxLocation.Enabled = false;
+
+            this.dataAcqusitionUnits1TableAdapter.Fill(this.softSensDBDataSet.DataAcqusitionUnits1);
+            comboBoxDeviceFind.Text = deviceNameTextBox.Text;
+
+
+
+
+
+        }
+
+        private void buttonBaud_Click(object sender, EventArgs e)
+        {
+            comboBoxPorts.Text = cOMPortTextBox.Text;
+            comboBoxBaud.Text = baudRateTextBox.Text;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex > -1)
+            {
+                try
+                {
+                    int DAUIDfilter = Convert.ToInt32(comboBox1.SelectedValue.ToString());
+                    dataAcqusitionUnitsTableAdapter.FillByDAUID(this.softSensDBDataSet.DataAcqusitionUnits, DAUIDfilter);
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("ERROR! " + ex);
+                }
+            }
+        }
+
+        private void tabPageDatabase_Enter(object sender, EventArgs e)
+        {
+            this.dataAcqusitionUnits1TableAdapter.Fill(this.softSensDBDataSet.DataAcqusitionUnits1);
+
+            comboBox1.DisplayMember = "DeviceName";
+            comboBox1.ValueMember = "DAUID";
+            comboBox1.DataSource = softSensDBDataSet.DataAcqusitionUnits1;
+
+        }
+
+        private void buttonDAUChange_Click(object sender, EventArgs e)
+        {
+
+            buttonDAUNew.Enabled = false;
+            buttonDAUChange.Enabled = false;
+            deviceNameTextBox1.Enabled = true;
+            cOMPortTextBox1.Enabled = true;
+            baudRateTextBox1.Enabled = true;
+            installationDateDateTimePicker1.Enabled = true;
+            configUpdateDateDateTimePicker1.Enabled = true;
+            comboBox2.Enabled = true;
+            comboBox3.Enabled = true;
+            comboBox4.Enabled = true;
+
+            comboBox1.Text = "";
+            comboBox1.Enabled = false;
+
+
+        }
+
+        private void buttonDAUSave_Click(object sender, EventArgs e)
+        {
+            buttonDAUNew.Enabled = true;
+            buttonDAUChange.Enabled = true;
+
+            deviceNameTextBox1.Enabled = false;
+            cOMPortTextBox1.Enabled = false;
+            baudRateTextBox1.Enabled = false;
+            installationDateDateTimePicker1.Enabled = false;
+            configUpdateDateDateTimePicker1.Enabled = false;
+            comboBox2.Enabled = false;
+            comboBox3.Enabled = false;
+            comboBox4.Enabled = false;
+            dataAcqusitionUnitsBindingSource1.EndEdit();
+            this.dataAcqusitionUnitsTableAdapter.Update(this.softSensDBDataSet.DataAcqusitionUnits);
+
+            
+            comboBox1.Enabled = true;
+            this.dataAcqusitionUnits1TableAdapter.Fill(this.softSensDBDataSet.DataAcqusitionUnits1);
+            comboBox1.Text = deviceNameTextBox1.Text;
+
+
+        }
+
+        private void buttonDAUNew_Click(object sender, EventArgs e)
+        {
+            buttonDAUNew.Enabled = false;
+            buttonDAUChange.Enabled = false;
+            
+            deviceNameTextBox1.Enabled = true;
+            cOMPortTextBox1.Enabled = true;
+            baudRateTextBox1.Enabled = true;
+            installationDateDateTimePicker1.Enabled = true;
+            configUpdateDateDateTimePicker1.Enabled = true;
+            comboBox2.Enabled = true;
+            comboBox3.Enabled = true;
+            comboBox4.Enabled = true;
+            comboBox1.Text = "";
+            comboBox1.Enabled = false;
+
+            dataAcqusitionUnitsBindingSource1.AddNew();
+            dataAcqusitionUnitsBindingSource1.MoveLast();
+
+
+
+        }
+
+        private void buttonDAUCancel_Click(object sender, EventArgs e)
+        {
+            deviceNameTextBox1.Enabled = false;
+            cOMPortTextBox1.Enabled = false;
+            baudRateTextBox1.Enabled = false;
+            installationDateDateTimePicker1.Enabled = false;
+            configUpdateDateDateTimePicker1.Enabled = false;
+            comboBox2.Enabled = false;
+            comboBox3.Enabled = false;
+            comboBox4.Enabled = false;
+
+
+            dataAcqusitionUnitsBindingSource1.CancelEdit();
+            comboBox1.Enabled = true;
+            comboBox1.Text = deviceNameTextBox1.Text;
+            buttonDAUNew.Enabled = true;
+            buttonDAUChange.Enabled = true;
+        }
+
+        private void tabPageString_Enter(object sender, EventArgs e)
+        {
+            int filterDAU = Convert.ToInt32(comboBox1.SelectedValue.ToString());
+            this.instrumentsToComboBoxTableAdapter.Fill(this.softSensDBDataSet.InstrumentsToComboBox, filterDAU);
+            
+            comboBoxInstrumentFind.DisplayMember = "Tagname";
+            comboBoxInstrumentFind.ValueMember = "Tagname";
+            comboBoxInstrumentFind.DataSource = softSensDBDataSet.InstrumentsToComboBox;
+            
+        }
+
+        private void comboBoxInstrumentFind_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxInstrumentFind.SelectedIndex > -1)
+            {
+                try
+                {
+                    string tagnameFilter = comboBoxInstrumentFind.SelectedValue.ToString();
+                    label8.Text = comboBoxInstrumentFind.SelectedItem.ToString();
+                    instrumentsTableAdapter.FillBy(this.softSensDBDataSet.Instruments, tagnameFilter);
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("ERROR! " + ex);
+                }
+            }
+        }
     }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+  // enter all data from comboboxes
+  dataAcqusitionUnitsTableAdapter.InsertQuery(comboBoxDAU.Text,
+                                                             0,
+                                                             0,
+                                                  DateTime.Now,
+                                                          null,
+                                     Convert.ToInt32(comboBoxRDC.SelectedValue),
+                            Convert.ToInt32(comboBoxManufacturer.SelectedValue),
+                                  Convert.ToInt32(comboBoxLocation.SelectedValue));
+
+
+
+
+  dataAcqusitionUnitsBindingSource.CancelEdit();
+
+
+      if (comboBoxNewRDC.SelectedIndex > -1)
+  {
+      this.remoteDataCollectorsTableAdapter.FillByRDCID(this.softSensDBDataSet.RemoteDataCollectors, Convert.ToInt32(comboBoxNewRDC.Text));
+
+  }
+
+
+  //Change comboBoxRDC
+
+  //remoteDataCollectorsTableAdapter.GetDataBy(Convert.ToInt32(comboBoxNewRDC.Text));
+  //bsRDC.DataSource = remoteDataCollectorsBindingSource;
+  //comboBoxRDC.DataSource = bsRDC;
+
+  */
+
+
+    }

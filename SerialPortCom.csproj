@@ -98,6 +98,19 @@
     </Compile>
     <Compile Include="SerialPortcom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoftSensDBDataSet.cs">
+      <DependentUpon>SoftSensDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SoftSensDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SoftSensDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SoftSensDBDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SoftSensDBDataSet1.xsd</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </EmbeddedResource>
@@ -127,6 +140,28 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="SerialPortCom_TemporaryKey.pfx" />
+    <None Include="SoftSensDBDataSet.xsc">
+      <DependentUpon>SoftSensDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SoftSensDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SoftSensDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SoftSensDBDataSet.xss">
+      <DependentUpon>SoftSensDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SoftSensDBDataSet1.xsc">
+      <DependentUpon>SoftSensDBDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="SoftSensDBDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SoftSensDBDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SoftSensDBDataSet1.xss">
+      <DependentUpon>SoftSensDBDataSet1.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -148,6 +183,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddTransition_16x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

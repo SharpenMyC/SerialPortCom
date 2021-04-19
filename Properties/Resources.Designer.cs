@@ -63,6 +63,16 @@ namespace SerialPortCom.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AddTransition_16x {
+            get {
+                object obj = ResourceManager.GetObject("AddTransition_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AddVariable_16x {
             get {
                 object obj = ResourceManager.GetObject("AddVariable_16x", resourceCulture);
